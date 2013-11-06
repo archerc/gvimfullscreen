@@ -58,3 +58,8 @@ if has('gui_running') && has('libcall')
 	nmap <s-r> <Esc>:call SwitchVimTopMostMode()<CR>
 endif
 ```
+
+#dll文件说明
+
+`gvimfullscreen.dll`	for x86(32位)
+`gvimfullscreen.dll.x64`	for x64(64位,使用时请将.x64的扩展名去掉)
