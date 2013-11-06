@@ -57,7 +57,18 @@ LONG _declspec(dllexport) ToggleFullScreen() {
 			HMONITOR hMonitor;
 			long unsigned int z;
 			char p[MAX_PATH];
-			HDC dc = GetDC(hTextArea);
+			HDC dc;
+			COLORREF rgb;
+
+			dc = GetDC(hTextArea);
+			if (dc != NULL) {
+				GetWindowRect(hTextArea, &rc);
+				rgb = GetPixel(dc, rc.right - rc.left - 4, rc.bottom - rc.top - 4);
+				if (rgb != CLR_INVALID) {
+					SetDCBrushColor(dc, rgb);
+				}
+				ReleaseDC(hTextArea, dc);
+			}
 
 			z = (long unsigned int)IsZoomed(hTop)?1:0;
 			if(z) {
@@ -67,15 +78,6 @@ LONG _declspec(dllexport) ToggleFullScreen() {
 			GetWindowRect(hTop, &rc);
 			sprintf(p, "gVim_Position=%ld\t%ld\t%ld\t%ld\t%d", rc.left, rc.top, rc.right-rc.left, rc.bottom-rc.top, z);
 			putenv(p);
-
-			if (dc != NULL) {
-				COLORREF rgb = GetPixel(dc, 10, rc.bottom - rc.top - 15);
-				/*COLORREF rgb = RGB(255, 0, 0);*/
-				if (rgb != CLR_INVALID) {
-					SetDCBrushColor(dc, rgb);
-				}
-				ReleaseDC(hTextArea, dc);
-			}
 
 			hMonitor = MonitorFromRect(&rc, MONITOR_DEFAULTTONEAREST);
 
