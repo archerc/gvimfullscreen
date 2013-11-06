@@ -5,18 +5,18 @@ Allows you to run gvim in full screen on Windows on a single monitor.
 This is a copy of Yasuhiro Matsumoto's VimTweak's EnableMaximize functionality modified to deal with window borders and allowing the window to overlap the task bar.
 
 
-* ĞŞ¸´ÔÚ¶à¸öÏÔÊ¾Æ÷ÏÂ½«GVimÇĞÈëÈ«ÆÁÊ±Ö»ÄÜÔÚÖ÷ÏÔÊ¾Æ÷È«ÆÁµÄÎÊÌâ.
-* ĞŞ¸´ÔÚ½«GVim´°¿ÚÇĞ»»µ½È«ÆÁÊ±,´°¿ÚÓÒ²àºÍµ×²¿³öÏÖµÄ°×É«±ß¿ò(°×±ß)ÎÊÌâ.
-* ×¼È·¼ÇÂ¼GVim´°¿ÚµÄ´óĞ¡,×ø±ê,×´Ì¬µÈĞÅÏ¢,ÓÉÈ«ÆÁÇĞ»ØÕı³£´°¿ÚÊ±×¼È·»¹Ô­ÇĞ»»Ç°µÄ×´Ì¬.
-* Ôö¼ÓÉèÖÃGVim´°¿ÚÍ¸Ã÷¶ÈºÍÖÃ¶¥µÄ¹¦ÄÜ.
+* ä¿®å¤åœ¨å¤šä¸ªæ˜¾ç¤ºå™¨ä¸‹å°†GVimåˆ‡å…¥å…¨å±æ—¶åªèƒ½åœ¨ä¸»æ˜¾ç¤ºå™¨å…¨å±çš„é—®é¢˜.
+* ä¿®å¤åœ¨å°†GVimçª—å£åˆ‡æ¢åˆ°å…¨å±æ—¶,çª—å£å³ä¾§å’Œåº•éƒ¨å‡ºç°çš„ç™½è‰²è¾¹æ¡†(ç™½è¾¹)é—®é¢˜.
+* å‡†ç¡®è®°å½•GVimçª—å£çš„å¤§å°,åæ ‡,çŠ¶æ€ç­‰ä¿¡æ¯,ç”±å…¨å±åˆ‡å›æ­£å¸¸çª—å£æ—¶å‡†ç¡®è¿˜åŸåˆ‡æ¢å‰çš„çŠ¶æ€.
+* å¢åŠ è®¾ç½®GVimçª—å£é€æ˜åº¦å’Œç½®é¡¶çš„åŠŸèƒ½.
 
 
-#Ê¹ÓÃ·½·¨
+#ä½¿ç”¨æ–¹æ³•
 ```
 :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)
 ```
 
-#vimrc ÅäÖÃÊµÀı:
+#vimrc é…ç½®å®ä¾‹:
 ```
 if has('gui_running') && has('libcall')
 	let g:MyVimLib = $VIMRUNTIME.'/gvimfullscreen.dll'
@@ -59,15 +59,15 @@ if has('gui_running') && has('libcall')
 endif
 ```
 
-#dllÎÄ¼şËµÃ÷
+#dllæ–‡ä»¶è¯´æ˜
 
-`gvimfullscreen.dll`	for x86(32Î»)
-`gvimfullscreen.dll.x64`	for x64(64Î»,Ê¹ÓÃÊ±Çë½«.x64µÄÀ©Õ¹ÃûÈ¥µô)
+`gvimfullscreen.dll`	for x86(32ä½)
+`gvimfullscreen.dll.x64`	for x64(64ä½,ä½¿ç”¨æ—¶è¯·å°†.x64çš„æ‰©å±•åå»æ‰)
 
 
 
-#È«ÆÁºóGVim´°¿ÚµÄÒ»Ğ©Ğ¡ÎÊÌâ.
-* ¿ÉÄÜ»á´æÔÚÈ«ÆÁºó´°¿ÚÈÔÓĞÒ»²¿·Ö±ß¿òµÄÎÊÌâ, ¿ÉÒÔÍ¨¹ıĞŞ¸Ä`src/gui_w32.c`À´½â¾ö.
+#å…¨å±åGVimçª—å£çš„ä¸€äº›å°é—®é¢˜.
+* å¯èƒ½ä¼šå­˜åœ¨å…¨å±åçª—å£ä»æœ‰ä¸€éƒ¨åˆ†è¾¹æ¡†çš„é—®é¢˜, å¯ä»¥é€šè¿‡ä¿®æ”¹`src/gui_w32.c`æ¥è§£å†³.
 
 ```
 diff -r 87ef9ff527dd src/gui_w32.c
