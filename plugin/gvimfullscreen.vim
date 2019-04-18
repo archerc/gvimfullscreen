@@ -28,7 +28,7 @@ let g:gvimfullscreen_dll = glob(expand('<sfile>:h:h') . '/lib/gvimfullscreen.dll
 if filereadable(g:gvimfullscreen_dll)
   echom g:gvimfullscreen_dll
   if has('gui_running') && has('libcall')
-    function ToggleFullScreen()
+    function! ToggleFullScreen()
       call libcallnr(g:gvimfullscreen_dll, "ToggleFullScreen", 0)
     endfunction
     command -nargs=0 ToggleFullscreen :call ToggleFullscreen()

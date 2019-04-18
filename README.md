@@ -1,61 +1,29 @@
-This is a mirror of http://www.vim.org/scripts/script.php?script_id=2596
-
-Allows you to run gvim in full screen on Windows on a single monitor.
-
-This is a copy of Yasuhiro Matsumoto's VimTweak's EnableMaximize functionality modified to deal with window borders and allowing the window to overlap the task bar.
-
-
-* 修复在多个显示器下将GVim切入全屏时只能在主显示器全屏的问题.
-* 修复在将GVim窗口切换到全屏时,窗口右侧和底部出现的白色边框(白边)问题.
-* 准确记录GVim窗口的大小,坐标,状态等信息,由全屏切回正常窗口时准确还原切换前的状态.
-* 增加设置GVim窗口透明度和置顶的功能.
-
+This is forked from https://github.com/xqin/gvimfullscreen
 
 #使用方法
+
 ```
-:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)
+
+- <F11> 切换全屏幕
+- <Shift-Y> 增大alpha值(3), 降低透明度
+- <Shift-T> 减小alpha值(-3)， 提高透明度
+- <Shift-R> 切换顶层模式
 ```
 
 #vimrc 配置实例:
+
 ```
-if has('gui_running') && has('libcall')
-	let g:MyVimLib = $VIMRUNTIME.'/gvimfullscreen.dll'
-	function ToggleFullScreen()
-		call libcallnr(g:MyVimLib, "ToggleFullScreen", 0)
-	endfunction
-    
-	"Alt+Enter
-	map <A-Enter> <Esc>:call ToggleFullScreen()<CR>
-
-	let g:VimAlpha = 240
-	function! SetAlpha(alpha)
-		let g:VimAlpha = g:VimAlpha + a:alpha
-		if g:VimAlpha < 180
-			let g:VimAlpha = 180
-		endif
-		if g:VimAlpha > 255
-			let g:VimAlpha = 255
-		endif
-		call libcall(g:MyVimLib, 'SetAlpha', g:VimAlpha)
-	endfunction
-    
-	"Shift+Y
-	nmap <s-y> <Esc>:call SetAlpha(3)<CR>
-	"Shift+T
-	nmap <s-t> <Esc>:call SetAlpha(-3)<CR>
-
-	let g:VimTopMost = 0
-	function! SwitchVimTopMostMode()
-		if g:VimTopMost == 0
-			let g:VimTopMost = 1
-		else
-			let g:VimTopMost = 0
-		endif
-		call libcall(g:MyVimLib, 'EnableTopMost', g:VimTopMost)
-	endfunction
-    
-	"Shift+R
-	nmap <s-r> <Esc>:call SwitchVimTopMostMode()<CR>
+if !hasmapto('<Plug>(toggle-fullscreen)')
+	nmap <F11> <Plug>(toggle-fullscreen)
+endif
+if !hasmapto('<Plug>(vim-increase-alpha)')
+	nmap <S-Y> <Plug>(vim-increase-alpha)
+endif
+if !hasmapto('<Plug>(vim-decrease-alpha)')
+	nmap <S-T> <Plug>(vim-decrease-alpha)
+endif
+if !hasmapto('<Plug>(toggle-top-most)')
+	nmap <S-R> <Plug>(toggle-top-most)
 endif
 ```
 
